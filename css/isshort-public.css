@@ -1,0 +1,132 @@
+/*General*/
+
+div.isshort-wrapper {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    margin: 15px 0;
+}
+
+/*
+*=================================
+*content
+*===================================
+*/
+
+div.isshort-wrapper .isshort-content {
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 90%;
+    position: relative;
+    margin: 0 20px;
+}
+
+/*left*/
+
+div.isshort-wrapper .isshort-content.content-top-left, div.isshort-wrapper .isshort-content.content-bottom-left {
+    float: left;
+}
+
+/*right*/
+div.isshort-wrapper .isshort-content.content-top-right, div.isshort-wrapper .isshort-content.content-bottom-right {
+    float: right;
+}
+
+/*
+*=============================================
+* sides-wrap
+*=============================================
+*/
+
+.isshort-side {
+    height: 100%;
+    width: 20px;
+    display: block;
+    /*border:1px solid blue;*/
+}
+
+/*left*/
+.isshort-side.top-left, .isshort-side.bottom-left {
+    float: left;
+    position: absolute;
+    top: 0;
+    left:0
+}
+
+/*right*/
+
+.isshort-side.top-right, .isshort-side.bottom-right {
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/*bottom*/
+
+.isshort-side.bottom-right, .isshort-side.bottom-left {
+    position: absolute;
+    bottom: 0;
+}
+
+/*
+*==============================================
+Tips
+*==============================================
+*/
+
+
+/*left bottom*/
+
+div.isshort-wrapper .isshort-side .isshort-tip {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/*tips*/
+
+.tip-top-right {
+    border-width: 20px 20px 0 0;
+}
+.tip-top-left {
+    border-width: 0 20px 20px 0;
+}
+.tip-bottom-left {
+    border-width: 0 0 20px 20px;
+    bottom: 0;
+    position: absolute;
+}
+.tip-bottom-right {
+    border-width: 20px 0 0 20px;
+    bottom: 0;
+    position: absolute;
+}
+
+/*
+*==============================================
+    Captions
+*==============================================
+*/
+.isshort-caption {
+    float:left;
+    position: relative;
+    margin: 7px 20px 0 0;
+}
+
+/*circle*/
+
+.isshort-caption.circle {
+    border-radius: 50%;
+}
+.isshort-inner {
+    position:absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.clearfix {
+    clear:both;
+}
