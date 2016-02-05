@@ -76,6 +76,7 @@ function caption_shortcode($atts, $content=null) {
 		 'text-color'=> 'white',
 		 'size' => '4em',
 		 'font-family' => 'Georgia',
+		'hover' => 'hvr-buzz-out',
 	 	), $atts );
     return caption_shortcode_html($atts, $content);
 }
@@ -86,7 +87,7 @@ function caption_shortcode_html($atts, $content){
 
     ob_start(); ?>
 	<!-- <div class="clearfix"></div> -->
-    <p><div class="isshort-caption <?php echo $atts['style'];?>" style="<?php echo $styles; ?>">
+    <p><div class="isshort-caption <?php echo $atts['hover']; ?>  <?php echo $atts['style'];?>" style="<?php echo $styles; ?>">
         <div class="isshort-inner" style="font-size:<?php echo ($atts['size']/2.4); ?>em;font-family:<?php echo $atts['font-family'];?>"><?php echo $content; ?></div>
     </div></p>
 
@@ -116,7 +117,7 @@ function answer_shortcode( $atts , $content = null ) {
 		 'corner' => 'bottom-right',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'animate' => 'pulse',
+		 'hover' => '',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
@@ -144,7 +145,7 @@ function isshort_shortcode_html( $atts, $content) {
 
 	ob_start();
 	?>
-        <div class="isshort-wrapper wow <?php echo $atts['animate']; ?> " data-wow-offset="10">
+        <div class="isshort-wrapper <?php echo $atts['hover']; ?> " >
             <div class="isshort-side <?php echo $atts['corner']; ?>">
                 <div class="isshort-tip tip-<?php echo $atts['corner']; ?>" style="border-color:<?php echo $tip;?>"></div>
             </div>
