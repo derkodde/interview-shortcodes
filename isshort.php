@@ -128,19 +128,15 @@ function isshort_shortcode_html( $atts, $content) {
 	$color=$atts['color'];
 	if ($atts['corner']=='top-left') {
 		$tip='transparent '.$color.' transparent transparent;';
-		// $wow_class = 'rotateInUpLeft';
 	}
 	if ($atts['corner']=='bottom-left'){
 		$tip='transparent transparent '.$color.' transparent ;';
-		// $wow_class = 'rotateInUpLeft';
 	}
 	if ($atts['corner']=='top-right') {
 		$tip= $color.' transparent transparent transparent;';
-		// $wow_class = 'rotateInUpRight';
 	}
 	if ($atts['corner']=='bottom-right') {
 		$tip= 'transparent transparent transparent '.$color;
-		// $wow_class = 'rotateInUpRight';
 	}
 
 	ob_start();
