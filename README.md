@@ -4,4 +4,4 @@
 
 
 <h3>caption_shortcode</h3>
-    <code>[cap]T[/cap]est</code>
+   [cap]T[/cap]est
