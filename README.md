@@ -3,6 +3,7 @@
 <h2>A wordpress plugin with shortcodes for interviews and chats</h2>
 
 <h3>caption_shortcode</h3>
+<<<<<<< HEAD
 
 <h4>simple use:</h4>    
 
@@ -23,3 +24,6 @@
 'radius' => '5px',
 'text-color'=> 'grey',
 'hover' => '',
+=======
+   [cap]T[/cap]est
+>>>>>>> 11476a3d4e8316a8a9afa786c7cc8d5b606bf5ce
