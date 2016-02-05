@@ -2,7 +2,6 @@
 
 <h2>A wordpress plugin with shortcodes for interviews and chats</h2>
 
-
 <h3>caption_shortcode</h3>
 
 <h4>simple use:</h4>    
