@@ -117,7 +117,7 @@ function answer_shortcode( $atts , $content = null ) {
 		 'corner' => 'bottom-right',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'hover' => '',
+		 'hover' => 'hvr-push',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
