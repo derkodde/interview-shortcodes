@@ -101,7 +101,7 @@ function question_shortcode( $atts , $content = null ) {
 		 'corner' => 'top-left',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'animate' => 'pulse',
+		 'hover' => 'hvr-push',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
