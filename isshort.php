@@ -16,7 +16,7 @@
  * Plugin Name:       Interview Styles shortcode
  * Plugin URI:        http://interviewstyles.derkod.de
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Author:            Sebastian Kotte
  * Author URI:        http://derkod.de
  * License:           GPL-2.0+
