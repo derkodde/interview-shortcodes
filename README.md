@@ -3,7 +3,6 @@
 <h2>A wordpress plugin with shortcodes for interviews and chats</h2>
 
 <h3>caption_shortcode</h3>
-<<<<<<< HEAD
 
 <h4>simple use:</h4>    
 
@@ -11,19 +10,11 @@
 
 <h4>attributes & values</h4>
 
-<dl>
-<dt>color</dt>
-<dd></dd>
+<h5>default values:</h5>
+Background-Color:    'color' => 'red',         --> [cap color="#DCF8C6"]T[/cap]    -> all valid CSS Color values
+Style:               'style' => 'circle',      --> [cap style="square"]T[/cap]     -> "square", "circle"
+Font-Color:          'text-color'=> 'white',   --> [cap text-color="#eee"]T[/cap]  -> all valid CSS Color values
+Width & height       'size' => '4em',
+                     'font-family' => 'Georgia',
+                     'hover' => 'hvr-buzz-out', 
 
-<dt></dt>
-<dd></dd>
-</dl>
-
-'color' => '#DCF8C6',
-'corner' => 'bottom-right',
-'radius' => '5px',
-'text-color'=> 'grey',
-'hover' => '',
-=======
-   [cap]T[/cap]est
->>>>>>> 11476a3d4e8316a8a9afa786c7cc8d5b606bf5ce
