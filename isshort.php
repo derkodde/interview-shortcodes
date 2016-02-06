@@ -76,7 +76,7 @@ function caption_shortcode($atts, $content=null) {
 		 'text-color'=> 'white',
 		 'size' => '4em',
 		 'font-family' => 'Georgia',
-		'hover' => 'hvr-buzz-out',
+		'hover' => '',
 	 	), $atts );
     return caption_shortcode_html($atts, $content);
 }
