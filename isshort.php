@@ -76,7 +76,7 @@ function caption_shortcode($atts, $content=null) {
 		 'text-color'=> 'white',
 		 'size' => '4em',
 		 'font-family' => 'Georgia',
-		'hover' => 'hvr-buzz-out',
+		'hover' => 'hvr-shrink',
 	 	), $atts );
     return caption_shortcode_html($atts, $content);
 }
@@ -86,7 +86,7 @@ function caption_shortcode_html($atts, $content){
     	$styles ="background-color:" .  $atts['color'] . ";color:" .  $atts['text-color'] . ";height:".  $atts['size'] .";width:".  $atts['size'];
 
     ob_start(); ?>
-	<!-- <div class="clearfix"></div> -->
+
     <p><div class="isshort-caption <?php echo $atts['hover']; ?>  <?php echo $atts['style'];?>" style="<?php echo $styles; ?>">
         <div class="isshort-inner" style="font-size:<?php echo ($atts['size']/2.4); ?>em;font-family:<?php echo $atts['font-family'];?>"><?php echo $content; ?></div>
     </div></p>
@@ -101,7 +101,7 @@ function question_shortcode( $atts , $content = null ) {
 		 'corner' => 'top-left',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'animate' => 'pulse',
+		 'hover' => 'hvr-shrink',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
@@ -117,7 +117,7 @@ function answer_shortcode( $atts , $content = null ) {
 		 'corner' => 'bottom-right',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'hover' => '',
+		 'hover' => 'hvr-shrink',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
@@ -153,4 +153,39 @@ function isshort_shortcode_html( $atts, $content) {
 	return ob_get_clean();
 }
 
+
 // Backend
+add_action('admin_menu', 'isshort_backendpage');
+
+function	isshort_backendpage() {
+	 add_menu_page ( 'Interview styles Options', 'Interview Styles', 'manage_options', 'isshort-option', 'isshort_options',  'dashicons-format-chat',  '12' );
+}
+
+
+function isshort_options() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	?>
+<h1>interview-shortcodes</h1>
+
+<h2>A wordpress plugin with shortcodes for interviews and chats</h2>
+
+<h3>caption_shortcode</h3>
+
+<h4>simple use:</h4>
+
+[cap]T[/cap]est
+
+<h4>attributes & values</h4>
+
+<h5>default values:</h5>
+Background-Color:    'color' => 'red',         --> [cap color="#DCF8C6"]T[/cap]    -> all valid CSS Color values<br/>
+Style:               'style' => 'circle',      --> [cap style="square"]T[/cap]     -> "square", "circle"<br/>
+Font-Color:          'text-color'=> 'white',   --> [cap text-color="#eee"]T[/cap]  -> all valid CSS Color values<br/>
+Width & height       'size' => '4em',<br />
+                     'font-family' => 'Georgia', <br/>
+                     'hover' => 'hvr-buzz-out', <br/>
+<?php
+
+}
