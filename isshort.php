@@ -207,7 +207,9 @@ function isshort_defaults_markup() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 	?>
-	hallo
+	<form>
+		<div></div>
+	</form>
 
 	<?php
 }
