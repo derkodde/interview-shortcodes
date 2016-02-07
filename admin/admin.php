@@ -19,26 +19,26 @@ function isshort_adminpage() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
-    // variables for the field and option names
-    $option_name = 'issc_caption_bgcolor';
-    $hidden_field_name = 'mt_submit_hidden';
-    $data_field_name = 'isshort_cap_color';
 
-    // Read in existing option value from database
-    $issc_caption_bgcolor = get_option(  $option_name, $cap_color );
+    // options array
+    $isshort_options = array(
 
-    $isshort_options = array (
-        'cap' => array (
-        'color' =>  $issc_caption_bgcolor,
-        ),
     );
 
+    // variables for the field and option names
+    $option_name = 'issc_caption_bgcolor';
+    $hidden_field_name = $option_name.'_hidden';
 
+    // Read in existing option value from database
+    $issc_caption_bgcolor = get_option(  $option_name, $cap_colo_val );
+
+
+    $cap_color_val = get_option(  $option_name, $cap_colo_val );
     // See if the user has posted us some information
     // If they did, this hidden field will be set to 'Y'
     if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y' ) {
         // Read their posted value
-        $cap_color_val = $_POST[ $data_field_name ];
+        $cap_color_val = $_POST[ $option_name ];
 
         // Save the posted value in the database
         update_option( $option_name, $cap_color_val );
@@ -49,7 +49,7 @@ function isshort_adminpage() {
 <div class="updated"><p><strong>gespeichert</strong></p></div>
 <?php
 
-    }
+}
 
     // Now display the settings editing screen
 
@@ -60,7 +60,7 @@ function isshort_adminpage() {
     <h2>Interview Styles Shortcode - Options</h2>
         <h3>Defaults<h3>
             <h4>Captions <code>[cap]t[/cap]</code></h4>
-            <p>Background color: <code>color="<?php echo $issc_caption_bgcolor; ?>"</code></p>
+            <p>Background color: <code>color="<?php echo $cap_color_val; ?>"</code></p>
 
             <hr />
         <h3>Settings</h3>
@@ -68,12 +68,12 @@ function isshort_adminpage() {
         <div class="form-group ">
             <h4>Captions</h4>
             <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
-            <label class="col-sm-2 control-label" for="<?php echo $data_field_name; ?>">Background - Color:</label>
+            <label class="col-sm-2 control-label" for="<?php echo $option_name; ?>">Background - Color:</label>
              <div class="col-sm-6 ">
-                <input class="form-control" type="text"  name="<?php echo $data_field_name; ?>" value="<?php echo $issc_caption_bgcolor; ?>" >
+                <input class="form-control" type="text"  name="<?php echo $option_name; ?>" value="<?php echo $cap_color_val; ?>" >
             </div>
             <div class="col-sm-4">
-                <code>[cap color="<?php echo $issc_caption_bgcolor; ?>"]S.K.[/cap]</code>
+                <code>[cap color="<?php echo $cap_color_val; ?>"]S.K.[/cap]</code>
             </div>
 
             <hr />
@@ -86,5 +86,4 @@ function isshort_adminpage() {
     </form>
 </div><!--wrap-->
 <?php
-    return $isshort_options;
 }

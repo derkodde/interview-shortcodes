@@ -62,7 +62,7 @@ function enqueue_isshort_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 
-public $isshort_options;
+
 
 /*
 *
@@ -73,7 +73,7 @@ function caption_shortcode($atts, $content=null ) {
 
 	// Attributes
 	 $atts = shortcode_atts( array(
-		 'color' =>  $isshort_options['cap']['color'],
+		 'color' =>  get_option('issc_caption_bgcolor'),
 		 'style' => 'circle',
 		 'text-color'=> 'white',
 		 'size' => '4em',
