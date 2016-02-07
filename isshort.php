@@ -63,15 +63,17 @@ function enqueue_isshort_styles() {
 add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 
 
+
 /*
 *
 *Add Shortcodes
 *
 */
-function caption_shortcode($atts, $content=null) {
-    // Attributes
+function caption_shortcode($atts, $content=null ) {
+
+	// Attributes
 	 $atts = shortcode_atts( array(
-		 'color' => 'red',
+		 'color' =>  get_option('issc_caption_bgcolor'),
 		 'style' => 'circle',
 		 'text-color'=> 'white',
 		 'size' => '4em',
@@ -88,7 +90,7 @@ function caption_shortcode_html($atts, $content){
     ob_start(); ?>
 
     <p><div class="isshort-caption <?php echo $atts['hover']; ?>  <?php echo $atts['style'];?>" style="<?php echo $styles; ?>">
-        <div class="isshort-inner" style="font-size:<?php echo ($atts['size']/2.4); ?>em;font-family:<?php echo $atts['font-family'];?>"><?php echo $content; ?></div>
+        <div class="isshort-inner" style="font-size:<?php echo ($atts['size']/2.3); ?>em;font-family:<?php echo $atts['font-family'];?>"><?php echo $content; ?></div>
     </div></p>
 
     <?php return ob_get_clean();
@@ -161,54 +163,12 @@ function isshort_shortcode_html( $atts, $content) {
 *================================
 */
 
-// übergeordnete Menüseite
-add_action('admin_menu', 'isshort_backendpage');
-
-function	isshort_backendpage() {
-	 add_menu_page ( 'Interview styles Options', 'Interviev Styles', 'manage_options', 'isshort_howto', 'isshort_howto',  'dashicons-format-chat',  '12' );
-}
-
-
-function isshort_howto() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
-	?>
-<h1>How To</h1>
-
-<h2>A wordpress plugin with shortcodes for interviews and chats</h2>
-
-<h3>caption_shortcode</h3>
-
-<h4>simple use:</h4>
-
-[cap]T[/cap]est
-
-<h4>attributes & values</h4>
-
-<h5>default values:</h5>
-Background-Color:    'color' => 'red',         --> [cap color="#DCF8C6"]T[/cap]    -> all valid CSS Color values<br/>
-Style:               'style' => 'circle',      --> [cap style="square"]T[/cap]     -> "square", "circle"<br/>
-Width & height       'size' => '4em',<br />
-                     'font-family' => 'Georgia', <br/>
-                     'hover' => 'hvr-buzz-out', <br/>
-<?php
-
-}
 
 // Defaultwerte seite
 add_action('admin_menu', 'isshort_defaults');
 function isshort_defaults(){
-	add_submenu_page( 'isshort_howto', 'defaults', 'Manage Defaults', 'manage_options', 'shortcode-defaults', 'isshort_defaults_markup');
+	add_plugins_page( 'interviewstyles', 'Interview Styles', 'manage_options', 'isshort-options', 'isshort_adminpage');
 }
 
-function isshort_defaults_markup() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
-	?>
-	<form>
-	</form>
-
-	<?php
-}
+// settings form markup
+include( plugin_dir_path( __FILE__ ) . '/admin/admin.php');
