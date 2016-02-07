@@ -22,6 +22,7 @@ function isshort_adminpage() {
 
     // options array
     $isshort_options = array(
+        
 
     );
 
@@ -33,6 +34,7 @@ function isshort_adminpage() {
     $issc_caption_bgcolor = get_option(  $option_name, $cap_colo_val );
 
 
+    $cap_color_val  = 'black';
     $cap_color_val = get_option(  $option_name, $cap_colo_val );
     // See if the user has posted us some information
     // If they did, this hidden field will be set to 'Y'
