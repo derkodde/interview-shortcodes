@@ -155,20 +155,26 @@ function isshort_shortcode_html( $atts, $content) {
 }
 
 
-// Backend
+/*
+*================================
+* Backend
+*================================
+*/
+
+// übergeordnete Menüseite
 add_action('admin_menu', 'isshort_backendpage');
 
 function	isshort_backendpage() {
-	 add_menu_page ( 'Interview styles Options', 'Interview Styles', 'manage_options', 'isshort-option', 'isshort_options',  'dashicons-format-chat',  '12' );
+	 add_menu_page ( 'Interview styles Options', 'Interviev Styles', 'manage_options', 'isshort_howto', 'isshort_howto',  'dashicons-format-chat',  '12' );
 }
 
 
-function isshort_options() {
+function isshort_howto() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 	?>
-<h1>interview-shortcodes</h1>
+<h1>How To</h1>
 
 <h2>A wordpress plugin with shortcodes for interviews and chats</h2>
 
@@ -183,10 +189,26 @@ function isshort_options() {
 <h5>default values:</h5>
 Background-Color:    'color' => 'red',         --> [cap color="#DCF8C6"]T[/cap]    -> all valid CSS Color values<br/>
 Style:               'style' => 'circle',      --> [cap style="square"]T[/cap]     -> "square", "circle"<br/>
-Font-Color:          'text-color'=> 'white',   --> [cap text-color="#eee"]T[/cap]  -> all valid CSS Color values<br/>
 Width & height       'size' => '4em',<br />
                      'font-family' => 'Georgia', <br/>
                      'hover' => 'hvr-buzz-out', <br/>
 <?php
 
+}
+
+// Defaultwerte seite
+add_action('admin_menu', 'isshort_defaults');
+function isshort_defaults(){
+	add_submenu_page( 'isshort_howto', 'defaults', 'Manage Defaults', 'manage_options', 'shortcode-defaults', 'isshort_defaults_markup');
+}
+
+function isshort_defaults_markup() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	?>
+	<form>
+	</form>
+
+	<?php
 }
