@@ -153,15 +153,22 @@ function isshort_shortcode_html( $atts, $content) {
 	return ob_get_clean();
 }
 
-// Backend
+
+/*
+*================================
+* Backend
+*================================
+*/
+
+// übergeordnete Menüseite
 add_action('admin_menu', 'isshort_backendpage');
 
 function	isshort_backendpage() {
-	 add_menu_page ( 'Interview styles Options', 'Interview Styles', 'manage_options', 'isshort-option', 'isshort_options',  'dashicons-format-chat',  '12' );
+	 add_menu_page ( 'Interview styles Options', 'Interview Styles', 'manage_options', 'isshort_howto', 'isshort_howto',  'dashicons-format-chat',  '12' );
 }
 
 
-function isshort_options() {
+function isshort_howto() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
@@ -187,4 +194,20 @@ Width & height       'size' => '4em',<br />
                      'hover' => 'hvr-buzz-out', <br/>
 <?php
 
+}
+
+// Defaultwerte seite
+add_action('admin_menu', 'isshort_defaults');
+function isshort_defaults(){
+	add_submenu_page( 'isshort_howto', 'defaults', 'Manage Defaults', 'manage_options', 'shortcode-defaults', 'isshort_defaults_markup');
+}
+
+function isshort_defaults_markup() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	?>
+	hallo
+
+	<?php
 }
