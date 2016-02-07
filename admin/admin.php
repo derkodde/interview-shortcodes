@@ -23,6 +23,7 @@ function isshort_adminpage() {
     // options array
     $isshort_options = array(
 
+
     );
 
     // variables for the field and option names
@@ -32,8 +33,9 @@ function isshort_adminpage() {
     // Read in existing option value from database
     $issc_caption_bgcolor = get_option(  $option_name, $cap_colo_val );
 
-
+    $cap_color_val  = 'black';
     $cap_color_val = get_option(  $option_name, $cap_color_val );
+
     // See if the user has posted us some information
     // If they did, this hidden field will be set to 'Y'
     if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y' ) {
