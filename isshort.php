@@ -16,7 +16,7 @@
  * Plugin Name:       Interview Styles shortcode
  * Plugin URI:        http://interviewstyles.derkod.de
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Author:            Sebastian Kotte
  * Author URI:        http://derkod.de
  * License:           GPL-2.0+
@@ -78,7 +78,7 @@ function caption_shortcode($atts, $content=null ) {
 		 'text-color'=> 'white',
 		 'size' => '4em',
 		 'font-family' => 'Georgia',
-		'hover' => 'hvr-buzz-out',
+		'hover' => 'hvr-shrink',
 	 	), $atts );
     return caption_shortcode_html($atts, $content);
 }
@@ -88,7 +88,7 @@ function caption_shortcode_html($atts, $content){
     	$styles ="background-color:" .  $atts['color'] . ";color:" .  $atts['text-color'] . ";height:".  $atts['size'] .";width:".  $atts['size'];
 
     ob_start(); ?>
-	<!-- <div class="clearfix"></div> -->
+
     <p><div class="isshort-caption <?php echo $atts['hover']; ?>  <?php echo $atts['style'];?>" style="<?php echo $styles; ?>">
         <div class="isshort-inner" style="font-size:<?php echo ($atts['size']/2.3); ?>em;font-family:<?php echo $atts['font-family'];?>"><?php echo $content; ?></div>
     </div></p>
@@ -103,7 +103,7 @@ function question_shortcode( $atts , $content = null ) {
 		 'corner' => 'top-left',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'animate' => 'pulse',
+		 'hover' => 'hvr-shrink',
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
@@ -119,7 +119,8 @@ function answer_shortcode( $atts , $content = null ) {
 		 'corner' => 'bottom-right',
 		 'radius' => '5px',
 		 'text-color'=> 'grey',
-		 'hover' => '',
+		 'hover' => 'hvr-shrink',
+
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
