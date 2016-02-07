@@ -14,24 +14,21 @@ function isshort_adminpage_bootstrap($hook) {
 }
 add_action( 'admin_enqueue_scripts', 'isshort_adminpage_bootstrap' );
 
+
 function isshort_adminpage() {
 
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
-    // options array
-    $isshort_options = array(
 
-
-    );
 
     // variables for the field and option names
     $option_name = 'issc_caption_bgcolor';
     $hidden_field_name = $option_name.'_hidden';
 
     // Read in existing option value from database
-    $issc_caption_bgcolor = get_option(  $option_name, $cap_colo_val );
+    $issc_caption_bgcolor = get_option(  $option_name, $cap_color_val );
 
     $cap_color_val  = 'black';
     $cap_color_val = get_option(  $option_name, $cap_color_val );
