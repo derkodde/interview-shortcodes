@@ -164,7 +164,7 @@ function isshort_shortcode_html( $atts, $content) {
 add_action('admin_menu', 'isshort_backendpage');
 
 function	isshort_backendpage() {
-	 add_menu_page ( 'Interview styles Options', 'Interview Styles', 'manage_options', 'isshort_howto', 'isshort_howto',  'dashicons-format-chat',  '12' );
+	 add_menu_page ( 'Interview styles Options', 'Interviev Styles', 'manage_options', 'isshort_howto', 'isshort_howto',  'dashicons-format-chat',  '12' );
 }
 
 
@@ -173,7 +173,7 @@ function isshort_howto() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 	?>
-<h1>interview-shortcodes</h1>
+<h1>How To</h1>
 
 <h2>A wordpress plugin with shortcodes for interviews and chats</h2>
 
