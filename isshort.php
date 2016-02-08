@@ -70,20 +70,19 @@ add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 *
 */
 function caption_shortcode($atts, $content=null ) {
-	$isshort_caption_options = getShortcodeOptions ('caption');
 
 	// Attributes
 	 $atts = shortcode_atts( array(
-		'color' =>  $isshort_caption_options['attr']['color']['value'],
-		'style' => $isshort_caption_options['attr']['style']['value'],
-		'text-color'=> $isshort_caption_options['attr']['text-color']['value'],
-		'size' => $isshort_caption_options['attr']['size']['value'],
-		'font-family' => $isshort_caption_options['attr']['font-family']['value'],
-		'hover' => $isshort_caption_options['attr']['hover']['value'],
+		'color' =>  getShortcodeOptions('caption', 'attr', 'style', 'value' ),
+		'style' => getShortcodeOptions('caption','attr','style','value'),
+		'text-color'=> getShortcodeOptions('caption' ,'attr','text-color','value'),
+		'size' => getShortcodeOptions('caption', 'attr','size','value'),
+		'font-family' => getShortcodeOptions('caption', 'attr','font-family','value'),
+		'hover' => getShortcodeOptions('caption','attr','hover','value'),
 		), $atts );
     return caption_shortcode_html($atts, $content);
 }
-add_shortcode('cap', 'caption_shortcode');
+	add_shortcode('cap', 'caption_shortcode');
 
 function caption_shortcode_html($atts, $content){
     	$styles ="background-color:" .  $atts['color'] . ";color:" .  $atts['text-color'] . ";height:".  $atts['size'] .";width:".  $atts['size'];

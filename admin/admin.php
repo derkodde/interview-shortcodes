@@ -21,10 +21,6 @@ function isshort_adminpage() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
-    // get the new BIG options array
-    $isshort_caption_options = getShortcodeOptions ('caption');
-    $isshort_caption_options['attr']['color']['value'];
-
 
 
     // variables for the field and option names
@@ -96,8 +92,8 @@ setCaptionDefaults ();
 function setCaptionDefaults (){
 
     $isshort_caption_options = array(
-        'name' => 'Captions',
         'shortcode' => 'cap',
+        'title' => 'Captions',
         'attr' => array(
             'color' => array(
                 'shortcode' => 'color',
@@ -142,12 +138,25 @@ function setAnswerDefaults (){
 
 }
 
-function getShortcodeOptions ($shortcode) {
+function getShortcodeOptions () {
+    // all insertet args as keys of array
+    $args = func_num_args();
+    $arrArgs = func_get_args();
 
-    $option_name = "isshort_".$shortcode."_options";
-    $shortcode_array = get_option(  $option_name );
-    return $shortcode_array;
+    // from DB
+    $db_option_name = "isshort_".$arrArgs['0']."_options";
+    array_shift($arrArgs);
+    $sc_array = get_option(  $db_option_name );
+
+    $result=$sc_array;
+
+    foreach ($arrArgs as $key => $value) {
+        $result=$result[$value];
+    }
+
+    // return $result;
 }
+
 
 function updateShortcodeOption ($shortcode, $attr) {
 
