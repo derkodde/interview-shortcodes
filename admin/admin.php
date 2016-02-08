@@ -21,16 +21,20 @@ function isshort_adminpage() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
+    // get the new BIG options array
+    $isshort_caption_options = getShortcodeOptions ('caption');
+    $isshort_caption_options['attr']['color']['value'];
+
 
 
     // variables for the field and option names
     $option_name = 'issc_caption_bgcolor';
     $hidden_field_name = $option_name.'_hidden';
 
-    // Read in existing option value from database
-    $issc_caption_bgcolor = get_option(  $option_name, $cap_color_val );
-
+    // default value
     $cap_color_val  = 'black';
+
+    // Read in existing option value from database
     $cap_color_val = get_option(  $option_name, $cap_color_val );
 
     // See if the user has posted us some information
@@ -59,6 +63,8 @@ function isshort_adminpage() {
     <h2>Interview Styles Shortcode - Options</h2>
         <h3>Defaults<h3>
             <h4>Captions <code>[cap]t[/cap]</code></h4>
+
+
             <p>Background color: <code>color="<?php echo $cap_color_val; ?>"</code></p>
 
             <hr />
@@ -74,9 +80,7 @@ function isshort_adminpage() {
             <div class="col-sm-4">
                 <code>[cap color="<?php echo $cap_color_val; ?>"]S.K.[/cap]</code>
             </div>
-
             <hr />
-
         </div><!--form-group-->
 
             <p class="submit">
@@ -85,4 +89,69 @@ function isshort_adminpage() {
     </form>
 </div><!--wrap-->
 <?php
+
+setCaptionDefaults ();
+}
+
+function setCaptionDefaults (){
+
+    $isshort_caption_options = array(
+        'name' => 'Captions',
+        'shortcode' => 'cap',
+        'attr' => array(
+            'color' => array(
+                'shortcode' => 'color',
+                'title' => 'Background-color',
+                'value' => 'grey',
+            ),
+            'style' => array(
+                'shortcode' => 'style',
+                'title' => 'Style',
+                'value' => 'square',
+            ),
+            'text-color'=> array(
+                'shortcode' => 'text-color',
+                'title' => 'Font-color',
+                'value' => 'white',
+            ),
+		    'size' => array(
+                'shortcode' => 'size',
+                'title' => 'Width and Height',
+                'value' => '4em',
+            ),
+            'font-family' => array(
+                'shortcode' => 'color',
+                'title' => 'Background-color',
+                'value' => '',
+            ),
+            'hover' => array(
+                'shortcode' => 'hover',
+                'title' => 'Hover style',
+                'value' => 'hvr-buzz-out',
+            ),
+        ),
+    );
+
+    update_option( 'isshort_caption_options', $isshort_caption_options );
+}
+
+function setQuestionDefaults (){
+
+}
+function setAnswerDefaults (){
+
+}
+
+function getShortcodeOptions ($shortcode) {
+
+    $option_name = "isshort_".$shortcode."_options";
+    $shortcode_array = get_option(  $option_name );
+    return $shortcode_array;
+}
+
+function updateShortcodeOption ($shortcode, $attr) {
+
+    $option_name = "isshort_".$shortcode."_options";
+    $shortcode_array = update_option(  $option_name , $attr );
+
 }

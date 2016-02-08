@@ -70,16 +70,17 @@ add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 *
 */
 function caption_shortcode($atts, $content=null ) {
+	$isshort_caption_options = getShortcodeOptions ('caption');
 
 	// Attributes
 	 $atts = shortcode_atts( array(
-		 'color' =>  get_option('issc_caption_bgcolor'),
-		 'style' => 'circle',
-		 'text-color'=> 'white',
-		 'size' => '4em',
-		 'font-family' => 'Georgia',
-		'hover' => 'hvr-shrink',
-	 	), $atts );
+		'color' =>  $isshort_caption_options['attr']['color']['value'],
+		'style' => $isshort_caption_options['attr']['style']['value'],
+		'text-color'=> $isshort_caption_options['attr']['text-color']['value'],
+		'size' => $isshort_caption_options['attr']['size']['value'],
+		'font-family' => $isshort_caption_options['attr']['font-family']['value'],
+		'hover' => $isshort_caption_options['attr']['hover']['value'],
+		), $atts );
     return caption_shortcode_html($atts, $content);
 }
 add_shortcode('cap', 'caption_shortcode');
