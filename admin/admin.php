@@ -22,6 +22,7 @@ function isshort_adminpage() {
 	}
 
 
+    updateShortcodeOption('yellow','caption', 'attr','color','value');
 
     // variables for the field and option names
     $option_name = 'issc_caption_bgcolor';
@@ -86,9 +87,11 @@ function isshort_adminpage() {
 </div><!--wrap-->
 <?php
 
-setCaptionDefaults ();
+// setCaptionDefaults ();
 }
 
+
+// structure of the options array
 function setCaptionDefaults (){
 
     $isshort_caption_options = array(
@@ -154,13 +157,33 @@ function getShortcodeOptions () {
         $result=$result[$value];
     }
 
-    // return $result;
+    return $result;
 }
 
 
-function updateShortcodeOption ($shortcode, $attr) {
+function updateShortcodeOption () {
+    // Params=> ($newVal, $shortcode, $args(siehe function set*Defaults() )
 
-    $option_name = "isshort_".$shortcode."_options";
-    $shortcode_array = update_option(  $option_name , $attr );
+    // get arguments to update
+    $args = func_num_args();
+    $arrArgs = func_get_args();
 
+    //update value
+    $newVal=array_shift($arrArgs);
+
+    // get old array from DB
+    $db_option_name = "isshort_".$arrArgs['0']."_options";
+    $shortcode_option_array = get_option(  $db_option_name  );
+    $shortcode=array_shift($arrArgs);
+
+    // put new value into options-array
+    $newVal_dest = '$shortcode_option_array';
+
+    foreach ($arrArgs as $key => $value) {
+        $newVal_dest = $newVal_dest."['".$value."']";
+    }
+
+    eval("$newVal_dest='$newVal';");
+    
+    update_option( $db_option_name,$shortcode_option_array);
 }
