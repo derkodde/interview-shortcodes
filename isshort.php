@@ -70,7 +70,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 *
 */
 function caption_shortcode($atts, $content=null ) {
-	$cap_def_atts=getShortcodeOptions('caption', 'attr');
+	$cap_def_atts=getShortcodeOptions('cap', 'attr');
 	// Attributes
 	 $atts = shortcode_atts( array(
 		'color' => $cap_def_atts['color']['value'],
