@@ -70,15 +70,15 @@ add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 *
 */
 function caption_shortcode($atts, $content=null ) {
-
+	$cap_def_atts=getShortcodeOptions('caption', 'attr');
 	// Attributes
 	 $atts = shortcode_atts( array(
-		'color' =>  getShortcodeOptions('caption', 'attr', 'style', 'value' ),
-		'style' => getShortcodeOptions('caption','attr','style','value'),
-		'text-color'=> getShortcodeOptions('caption' ,'attr','text-color','value'),
-		'size' => getShortcodeOptions('caption', 'attr','size','value'),
-		'font-family' => getShortcodeOptions('caption', 'attr','font-family','value'),
-		'hover' => getShortcodeOptions('caption','attr','hover','value'),
+		'color' => $cap_def_atts['color']['value'],
+		'style' => $cap_def_atts['style']['value'],
+		'text-color'=> $cap_def_atts['text-color']['value'],
+		'size' => $cap_def_atts['size']['value'],
+		'font-family' => $cap_def_atts['font-family']['value'],
+		'hover' => $cap_def_atts['hover']['value'],
 		), $atts );
     return caption_shortcode_html($atts, $content);
 }

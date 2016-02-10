@@ -22,8 +22,6 @@ function isshort_adminpage() {
 	}
 
 
-    updateShortcodeOption('yellow','caption', 'attr','color','value');
-
     // variables for the field and option names
     $option_name = 'issc_caption_bgcolor';
     $hidden_field_name = $option_name.'_hidden';
@@ -59,12 +57,11 @@ function isshort_adminpage() {
     ?>
     <h2>Interview Styles Shortcode - Options</h2>
         <h3>Defaults<h3>
+
             <h4>Captions <code>[cap]t[/cap]</code></h4>
-
-
             <p>Background color: <code>color="<?php echo $cap_color_val; ?>"</code></p>
-
             <hr />
+
         <h3>Settings</h3>
     <form class="form-horizontal" name="isshort_options" method="post" action="">
         <div class="form-group ">
@@ -184,6 +181,6 @@ function updateShortcodeOption () {
     }
 
     eval("$newVal_dest='$newVal';");
-    
+
     update_option( $db_option_name,$shortcode_option_array);
 }
