@@ -70,15 +70,15 @@ add_action( 'wp_enqueue_scripts', 'enqueue_isshort_styles' );
 *
 */
 function caption_shortcode($atts, $content=null ) {
-	$cap_def_atts=getShortcodeOptions('cap', 'attr');
+	$db_options=getShortcodeOptions('cap', 'attr');
 	// Attributes
 	 $atts = shortcode_atts( array(
-		'color' => $cap_def_atts['color']['value'],
-		'style' => $cap_def_atts['style']['value'],
-		'text-color'=> $cap_def_atts['text-color']['value'],
-		'size' => $cap_def_atts['size']['value'],
-		'font-family' => $cap_def_atts['font-family']['value'],
-		'hover' => $cap_def_atts['hover']['value'],
+		'color' => $db_options['color']['value'],
+		'style' => $db_options['style']['value'],
+		'text-color'=> $db_options['text-color']['value'],
+		'size' => $db_options['size']['value'],
+		'font-family' => $db_options['font-family']['value'],
+		'hover' => $db_options['hover']['value'],
 		), $atts );
     return caption_shortcode_html($atts, $content);
 }
@@ -96,14 +96,14 @@ function caption_shortcode_html($atts, $content){
     <?php return ob_get_clean();
 }
 function question_shortcode( $atts , $content = null ) {
-
+	$db_options=getShortcodeOptions('question', 'attr');
 	// Attributes
 	 $atts = shortcode_atts( array(
-		 'color' => '#eee',
-		 'corner' => 'top-left',
-		 'radius' => '5px',
-		 'text-color'=> 'grey',
-		 'hover' => 'hvr-shrink',
+		 'color' => $db_options['color']['value'],
+		 'corner' => $db_options['corner']['value'],
+		 'radius' =>  $db_options['radius']['value'],
+		 'text-color'=>  $db_options['text-color']['value'],
+		 'hover' =>  $db_options['hover']['value'],
 	 	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
@@ -112,16 +112,15 @@ return isshort_shortcode_html( $atts, $content) ;
 add_shortcode( 'question', 'question_shortcode' );
 
 function answer_shortcode( $atts , $content = null ) {
-
+	$db_options=getShortcodeOptions('answer', 'attr');
 	// Attributes
-	 $atts = shortcode_atts( array(
-		 'color' => '#DCF8C6',
-		 'corner' => 'bottom-right',
-		 'radius' => '5px',
-		 'text-color'=> 'grey',
-		 'hover' => 'hvr-shrink',
-
-	 	), $atts );
+	$atts = shortcode_atts( array(
+   	 'color' => $db_options['color']['value'],
+   	 'corner' => $db_options['corner']['value'],
+   	 'radius' =>  $db_options['radius']['value'],
+   	 'text-color'=>  $db_options['text-color']['value'],
+   	 'hover' =>  $db_options['hover']['value'],
+   	), $atts );
 
 return isshort_shortcode_html( $atts, $content) ;
 }
