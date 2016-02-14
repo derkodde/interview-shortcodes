@@ -5,12 +5,8 @@ function isshort_adminpage_bootstrap($hook) {
         return;
     }
 
-        wp_register_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
-        wp_enqueue_script( 'bootstrap-js');
-        wp_register_style('bootstrap-admin', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-        wp_enqueue_style('bootstrap-admin');
-        wp_register_style('isshort-admin',  plugin_dir_url( __FILE__ ) . '/admin.css' , array('bootstrap-admin'));
-        wp_enqueue_style('isshort-admin', array('bootstrap-admin'));
+        wp_register_style('isshort-admin',  plugin_dir_url( __FILE__ ) . '/admin.css' );
+        wp_enqueue_style('isshort-admin');
 }
 add_action( 'admin_enqueue_scripts', 'isshort_adminpage_bootstrap' );
 
@@ -28,9 +24,38 @@ function isshort_adminpage() {
 
      <!-- Now display the settings editing screen -->
 <div class="wrap ">
-    <h2>Interview Styles Shortcode - Options</h2>
-    <h3>Settings</h3>
-
+    <h1>Interview Styles Shortcode - Options</h1>
+    <div id="welcome-panel" class="welcome-panel">
+    	<!-- <a class="welcome-panel-close" href="http://localhost/wordpress/wp-admin/?welcome=0">Verwerfen</a> -->
+    			<div class="welcome-panel-content">
+    	<h2>How To</h2>
+    	<p class="about-description">Wir haben einige Links zusammengestellt, um dir den Start zu erleichtern:</p>
+    	<div class="welcome-panel-column-container">
+    	<div class="welcome-panel-column">
+    					<h3>Jetzt loslegen</h3>
+        			<!-- <a class="button button-primary button-hero load-customize hide-if-no-customize" href="http://localhost/wordpress/wp-admin/customize.php">Website anpassen</a>
+        				<a class="button button-primary button-hero hide-if-customize" href="http://localhost/wordpress/wp-admin/themes.php">Website anpassen</a>
+        					<p class="hide-if-no-customize">oder <a href="http://localhost/wordpress/wp-admin/themes.php">das komplette Theme wechseln</a></p> -->
+    			</div>
+    	<div class="welcome-panel-column">
+    		<h3>Nächste Schritte</h3>
+    		<!-- <ul>
+    					<li><a href="http://localhost/wordpress/wp-admin/post-new.php" class="welcome-icon welcome-write-blog">Schreib deinen ersten Beitrag</a></li>
+    			<li><a href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page" class="welcome-icon welcome-add-page">Erstelle eine "Über mich"-Seite</a></li>
+    					<li><a href="http://localhost/wordpress/" class="welcome-icon welcome-view-site">Sieh dir deine Website an</a></li>
+    		</ul> -->
+    	</div>
+    	<div class="welcome-panel-column welcome-panel-last">
+    		<h3>Weitere Möglichkeiten</h3>
+    		<!-- <ul>
+    					<li><div class="welcome-icon welcome-widgets-menus">Verwalten von <a href="http://localhost/wordpress/wp-admin/widgets.php">Widgets</a> oder <a href="http://localhost/wordpress/wp-admin/nav-menus.php">Menüs</a></div></li>
+    							<li><a href="http://localhost/wordpress/wp-admin/options-discussion.php" class="welcome-icon welcome-comments">Kommentare ein- oder ausschalten</a></li>
+    					<li><a href="https://codex.wordpress.org/First_Steps_With_WordPress" class="welcome-icon welcome-learn-more">Erfahre mehr über den Einstieg</a></li>
+    		</ul> -->
+    	</div>
+    	</div>
+    	</div>
+    		</div>
     <?php
 
     foreach ($isshort_options as $key => $value) {
@@ -47,68 +72,80 @@ function isshort_adminpage() {
 
             // Save the posted value in the database and Put a "settings saved" message on the screen
                 ?>
-            <div class="row">
-            <div class="well">
-            <h3>Gespeicherte Werte</h3><br/ >
-                <h4><?php echo $currShortcodeTitle; ?></h4>
-
-                <?php
-            foreach ($newVal as $key => $value) { ?>
-                <div class="col col-xs-3"> <p><?php echo $key ; ?> </p>  </div>
-                <div class="col col-xs-1"><p>=></p></div>
-                <div class="col col-xs-8"><p><?php echo $value ?> </p></div>
-
-                 <?php
-                updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
-            }
-            echo '<div style="clear:both"></div></div></div>';
-
+                <!-- <h2>Gespeicherte Werte</h2>
+                <h3><?php //echo $currShortcodeTitle; ?></h3> -->
+                <!-- <div class="postbox-container"><div class="postbox"><div class="inside">
+            <table class="form-table">
+                <tbody> -->
+                            <?php
+                        foreach ($newVal as $key => $value) { ?>
+                            <!-- <tr>
+                                <th scope="row"><label>
+                                    <?php// echo $key ; ?></label>
+                                </th>
+                                <td>
+                                    <?php //echo $value ?>
+                                </td>
+                            </tr> -->
+                             <?php
+                            updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
+                        }
+                        ?>
+                <!-- </tbody>
+            </table>
+        </div></div></div>
+        <div style="clear:both"></div> -->
+            <?php
             wp_die('<div class="updated"><p><strong>Shortcode gespeichert</strong></p><a href="" >zurück</a></div>');
         }
 
         ?>
-        <div class="well">
+
+        <div class="postbox-container"><div class="postbox"><div class="inside">
+            <table class="form-table">
+                <tbody>
+
+            <?php
+            $shortcode=$isshort_options[$key]['shortcode'];
+            $isshort_shortcode_options= $isshort_options[$key];
+            ?>
             <form class="form-horizontal" name="isshort_options" method="post" action="">
-                <?php
-                // echo "isshort_options : ";
-                // print_r($isshort_options);
-                // echo "<br/> shortcode :   ";
-                // print_r($shortcode=$isshort_options[$key]['shortcode']);
-                $shortcode=$isshort_options[$key]['shortcode'];
-                //
-                // echo "<br/> options-array : ";
-                // print_r($isshort_shortcode_options= $isshort_options[$key]);
-                $isshort_shortcode_options= $isshort_options[$key];
-
-                ?>
-
-                <!-- Caption formgroup -->
-                <h4><?php echo $isshort_shortcode_options['title'];?></h4>
-
+                <tr>
+                <th><h3><?php echo $isshort_shortcode_options['title'];?></h3></th>
+                </tr>
                 <?php foreach ($isshort_shortcode_options['attr'] as $key => $value): ?>
-                <div class="form-group ">
+                <tr>
+
                     <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="<?php echo $shortcode; ?>">
 
-                    <label class="col-sm-2 control-label" for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label>
-                    <div class="col-sm-6 ">
+                <th>
+                    <label for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label>
+                <th>
+                <td>
                         <input class="form-control" type="text"  name="<?php echo $key; ?>" value="<?php echo $value['value']; ?>" >
-                    </div>
-
-                    <div class="col-sm-4">
-                        <code>[cap <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/cap]</code>
-                    </div>
-                </div><!--form-group-->
+                <td>
+                <td>
+                <code>[cap <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/cap]</code>
+                </td><!--form-group-->
+                </tr>
                 <?php endforeach; ?>
-                <hr />
 
+                <tr>
+                <td>
                 <p class="submit">
                     <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
                 </p>
+            </td>
+                </tr>
             </form>
-        </div>
+        </tr>
+</tbody>
+</table>
+</div></div></div>
+<div class="clear"></div>
     <?php } ?>
 
-</div>
+</div><!--wrap-->
 <?php
 //
 // setOptionDefaults ();

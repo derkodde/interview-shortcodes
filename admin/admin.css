@@ -1,3 +1,5 @@
 .wpcontent {background-color: #F1F1F1;}
 form {padding:15px;}
 p.submit {text-align: right;}
+.postbox-container {width: 100%;}
+.postbox .inside {padding-left: 30px;}
