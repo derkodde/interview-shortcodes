@@ -25,6 +25,58 @@ function isshort_adminpage() {
      <!-- Now display the settings editing screen -->
 <div class="wrap ">
     <h1>Interview Styles Shortcode - Options</h1>
+    <?php
+
+    $isshort_options = getShortcodeOptions();
+    foreach ($isshort_options as $key => $value) {
+        $hidden_field_name = $key.'_hidden';
+        $currShortcodeTitle = $isshort_options[$key]['title'];
+        $currShortcode= $isshort_options[$key]['shortcode'];
+        // See if the user has posted us some information
+        // If they did, this hidden field will be set to 'Y'
+        if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == $key ) {
+            // Read their posted value
+            $newVal = $_POST;
+            array_shift($newVal);
+            array_pop($newVal);
+
+            // Save the posted value in the database and Put a "settings saved" message on the screen
+            ?>
+            <!-- <h2>Gespeicherte Werte</h2>
+            <h3><?php //echo $currShortcodeTitle; ?></h3> -->
+            <!-- <div class="postbox-container"><div class="postbox"><div class="inside">
+            <table class="form-table">
+            <tbody> -->
+            <?php
+            foreach ($newVal as $key => $value) {       ?>
+                <!-- <tr>
+                <th scope="row"><label>
+                <?php// echo $key ; ?></label>
+            </th>
+            <td>
+            <?php //echo $value ?>
+                    </td>
+                </tr> -->
+                <?php
+                updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
+            }
+            ?>
+            <!-- </tbody>
+            </table>
+            </div></div></div>
+            <div style="clear:both"></div> -->
+
+            <div class="updated"><p><strong><?php echo $currShortcodeTitle; ?> Shortcode gespeichert</strong></p></div>
+
+
+    <?php  }
+    }
+
+?>
+
+
+
+
     <div id="welcome-panel" class="welcome-panel">
     	<!-- <a class="welcome-panel-close" href="http://localhost/wordpress/wp-admin/?welcome=0">Verwerfen</a> -->
     			<div class="welcome-panel-content">
@@ -54,98 +106,64 @@ function isshort_adminpage() {
     	</div>
     	</div>
     		</div>
-    <?php
 
-    foreach ($isshort_options as $key => $value) {
-    	$hidden_field_name = $key.'_hidden';
-        $currShortcodeTitle = $isshort_options[$key]['title'];
-        $currShortcode= $isshort_options[$key]['shortcode'];
-        // See if the user has posted us some information
-        // If they did, this hidden field will be set to 'Y'
-        if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == $key ) {
-            // Read their posted value
-            $newVal = $_POST;
-            array_shift($newVal);
-            array_pop($newVal);
-
-            // Save the posted value in the database and Put a "settings saved" message on the screen
-                ?>
-                <!-- <h2>Gespeicherte Werte</h2>
-                <h3><?php //echo $currShortcodeTitle; ?></h3> -->
-                <!-- <div class="postbox-container"><div class="postbox"><div class="inside">
-            <table class="form-table">
-                <tbody> -->
-                            <?php
-                        foreach ($newVal as $key => $value) { ?>
-                            <!-- <tr>
-                                <th scope="row"><label>
-                                    <?php// echo $key ; ?></label>
-                                </th>
-                                <td>
-                                    <?php //echo $value ?>
-                                </td>
-                            </tr> -->
-                             <?php
-                            updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
-                        }
-                        ?>
-                <!-- </tbody>
-            </table>
-        </div></div></div>
-        <div style="clear:both"></div> -->
             <?php
-            wp_die('<div class="updated"><p><strong>Shortcode gespeichert</strong></p><a href="" >zurück</a></div>');
-        }
+            $isshort_options = getShortcodeOptions();
 
-        ?>
+
+
+
+
+    //loop the shortcodes
+           foreach ($isshort_options as $key => $value) {
+                 $shortcode=$isshort_options[$key]['shortcode'];
+                $isshort_shortcode_options= $isshort_options[$key];
+                ?>
 
         <div class="postbox-container"><div class="postbox"><div class="inside">
             <table class="form-table">
                 <tbody>
+                    <tr>
+                        <th><h3><?php echo $isshort_shortcode_options['title'];?></h3></th>
+                    </tr>
 
-            <?php
-            $shortcode=$isshort_options[$key]['shortcode'];
-            $isshort_shortcode_options= $isshort_options[$key];
-            ?>
+                <?php
+        //loop the shortcode settings
+        foreach ($isshort_shortcode_options['attr'] as $key => $value): ?>
             <form class="form-horizontal" name="isshort_options" method="post" action="">
                 <tr>
-                <th><h3><?php echo $isshort_shortcode_options['title'];?></h3></th>
-                </tr>
-                <?php foreach ($isshort_shortcode_options['attr'] as $key => $value): ?>
-                <tr>
+                    <input type="hidden" name="<?php echo $shortcode."_hidden" ?>" value="<?php echo $shortcode; ?>">
 
-                    <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="<?php echo $shortcode; ?>">
-
-                <th>
-                    <label for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label>
-                <th>
-                <td>
-                        <input class="form-control" type="text"  name="<?php echo $key; ?>" value="<?php echo $value['value']; ?>" >
-                <td>
-                <td>
-                <code>[<?php echo $shortcode;?> <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/<?php echo $shortcode;?>]</code>
-                </td><!--form-group-->
+                    <th>
+                        <label for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label>
+                    <th>
+                    <td>
+                            <input class="form-control" type="text"  name="<?php echo $key; ?>" value="<?php echo $value['value']; ?>" >
+                    <td>
+                    <td>
+                    <code>[<?php echo $shortcode;?> <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/<?php echo $shortcode;?>]</code>
+                    </td><!--form-group-->
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; //end of shortcode setting?>
 
                 <tr>
-                <td>
-                <p class="submit">
-                    <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-                </p>
-            </td>
+                    <td>
+                        <p class="submit">
+                            <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
+                        </p>
+                    </td>
                 </tr>
             </form>
-        </tr>
-</tbody>
-</table>
+        </tbody>
+    </table>
 </div></div></div>
 <div class="clear"></div>
-    <?php } ?>
-
+    <?php }// end of shortcode loop?>
 </div><!--wrap-->
+
 <?php
-//
+
+
 // setOptionDefaults ();
 
 }
