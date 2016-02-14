@@ -32,13 +32,13 @@ function isshort_adminpage() {
     	<p class="about-description">Wir haben einige Links zusammengestellt, um dir den Start zu erleichtern:</p>
     	<div class="welcome-panel-column-container">
     	<div class="welcome-panel-column">
-    					<h3>Jetzt loslegen</h3>
+    					<h3>Wie funktionieren shortcodes?</h3>
         			<!-- <a class="button button-primary button-hero load-customize hide-if-no-customize" href="http://localhost/wordpress/wp-admin/customize.php">Website anpassen</a>
         				<a class="button button-primary button-hero hide-if-customize" href="http://localhost/wordpress/wp-admin/themes.php">Website anpassen</a>
         					<p class="hide-if-no-customize">oder <a href="http://localhost/wordpress/wp-admin/themes.php">das komplette Theme wechseln</a></p> -->
     			</div>
     	<div class="welcome-panel-column">
-    		<h3>Nächste Schritte</h3>
+    		<h3>Attribute verwenden</h3>
     		<!-- <ul>
     					<li><a href="http://localhost/wordpress/wp-admin/post-new.php" class="welcome-icon welcome-write-blog">Schreib deinen ersten Beitrag</a></li>
     			<li><a href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page" class="welcome-icon welcome-add-page">Erstelle eine "Über mich"-Seite</a></li>
@@ -46,12 +46,10 @@ function isshort_adminpage() {
     		</ul> -->
     	</div>
     	<div class="welcome-panel-column welcome-panel-last">
-    		<h3>Weitere Möglichkeiten</h3>
-    		<!-- <ul>
-    					<li><div class="welcome-icon welcome-widgets-menus">Verwalten von <a href="http://localhost/wordpress/wp-admin/widgets.php">Widgets</a> oder <a href="http://localhost/wordpress/wp-admin/nav-menus.php">Menüs</a></div></li>
-    							<li><a href="http://localhost/wordpress/wp-admin/options-discussion.php" class="welcome-icon welcome-comments">Kommentare ein- oder ausschalten</a></li>
-    					<li><a href="https://codex.wordpress.org/First_Steps_With_WordPress" class="welcome-icon welcome-learn-more">Erfahre mehr über den Einstieg</a></li>
-    		</ul> -->
+    		<h3>Links</h3>
+    		<ul>
+				<li><a href="http://ianlunn.github.io/Hover/" class="welcome-icon welcome-learn-more">Erfahre mehr über Hover.CSS </a></li>
+    		</ul>
     	</div>
     	</div>
     	</div>
@@ -125,7 +123,7 @@ function isshort_adminpage() {
                         <input class="form-control" type="text"  name="<?php echo $key; ?>" value="<?php echo $value['value']; ?>" >
                 <td>
                 <td>
-                <code>[cap <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/cap]</code>
+                <code>[<?php echo $shortcode;?> <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/<?php echo $shortcode;?>]</code>
                 </td><!--form-group-->
                 </tr>
                 <?php endforeach; ?>
