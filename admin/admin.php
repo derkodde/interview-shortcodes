@@ -91,16 +91,16 @@ function isshort_adminpage() {
     			</div>
     	<div class="welcome-panel-column">
     		<h3>Attribute verwenden</h3>
-    		<!-- <ul>
-    					<li><a href="http://localhost/wordpress/wp-admin/post-new.php" class="welcome-icon welcome-write-blog">Schreib deinen ersten Beitrag</a></li>
-    			<li><a href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page" class="welcome-icon welcome-add-page">Erstelle eine "Über mich"-Seite</a></li>
-    					<li><a href="http://localhost/wordpress/" class="welcome-icon welcome-view-site">Sieh dir deine Website an</a></li>
-    		</ul> -->
+    		 <ul>
+    					<!-- <li><a href="http://localhost/wordpress/wp-admin/post-new.php" class="welcome-icon welcome-write-blog">Schreib deinen ersten Beitrag</a></li> -->
+    			<!-- <li><a href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page" class="welcome-icon welcome-add-page">Erstelle eine "Über mich"-Seite</a></li> -->
+    		</ul>
     	</div>
     	<div class="welcome-panel-column welcome-panel-last">
     		<h3>Links</h3>
     		<ul>
-				<li><a href="http://ianlunn.github.io/Hover/" class="welcome-icon welcome-learn-more">Erfahre mehr über Hover.CSS </a></li>
+                <li><a href="http://localhost/wordpress/" class="welcome-icon welcome-view-site">Sieh dir deine Website an</a></li>
+				<li><a href="http://ianlunn.github.io/Hover/" target="_blank" class="welcome-icon welcome-learn-more">Erfahre mehr über Hover.CSS </a></li>
     		</ul>
     	</div>
     	</div>
