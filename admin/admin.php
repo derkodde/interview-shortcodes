@@ -17,59 +17,37 @@ function isshort_adminpage() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
-    //get Array
-    $isshort_options = getShortcodeOptions();
-    //submit action
     ?>
 
      <!-- Now display the settings editing screen -->
 <div class="wrap ">
     <h1>Interview Styles Shortcode - Options</h1>
     <?php
+    //get Array
+    $isshort_options = getShortcodeOptions();
+    //submit action
 
     $isshort_options = getShortcodeOptions();
     foreach ($isshort_options as $key => $value) {
         $hidden_field_name = $key.'_hidden';
         $currShortcodeTitle = $isshort_options[$key]['title'];
         $currShortcode= $isshort_options[$key]['shortcode'];
+
         // See if the user has posted us some information
-        // If they did, this hidden field will be set to 'Y'
+
+        // If they did, this hidden field will be set to the shortcode name
         if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == $key ) {
             // Read their posted value
             $newVal = $_POST;
             array_shift($newVal);
             array_pop($newVal);
 
-            // Save the posted value in the database and Put a "settings saved" message on the screen
-            ?>
-            <!-- <h2>Gespeicherte Werte</h2>
-            <h3><?php //echo $currShortcodeTitle; ?></h3> -->
-            <!-- <div class="postbox-container"><div class="postbox"><div class="inside">
-            <table class="form-table">
-            <tbody> -->
-            <?php
-            foreach ($newVal as $key => $value) {       ?>
-                <!-- <tr>
-                <th scope="row"><label>
-                <?php// echo $key ; ?></label>
-            </th>
-            <td>
-            <?php //echo $value ?>
-                    </td>
-                </tr> -->
-                <?php
+            foreach ($newVal as $key => $value) {
                 updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
             }
-            ?>
-            <!-- </tbody>
-            </table>
-            </div></div></div>
-            <div style="clear:both"></div> -->
 
-            <div class="updated"><p><strong><?php echo $currShortcodeTitle; ?> Shortcode gespeichert</strong></p></div>
-
-
-    <?php  }
+            ?>  <div class="updated"><p><strong><?php echo $currShortcodeTitle; ?> Shortcode gespeichert</strong></p></div> <?php
+        }
     }
 
 ?>
@@ -85,22 +63,23 @@ function isshort_adminpage() {
     	<div class="welcome-panel-column-container">
     	<div class="welcome-panel-column">
     					<h3>Wie funktionieren shortcodes?</h3>
-        			<!-- <a class="button button-primary button-hero load-customize hide-if-no-customize" href="http://localhost/wordpress/wp-admin/customize.php">Website anpassen</a>
-        				<a class="button button-primary button-hero hide-if-customize" href="http://localhost/wordpress/wp-admin/themes.php">Website anpassen</a>
-        					<p class="hide-if-no-customize">oder <a href="http://localhost/wordpress/wp-admin/themes.php">das komplette Theme wechseln</a></p> -->
+                    <p>zum Beispiel: <code>[cap]T[/cap]est</code></p>
+        			<p>Nutze die macht der MCE Buttons!</p>
+                    <img src="">
     			</div>
     	<div class="welcome-panel-column">
     		<h3>Attribute verwenden</h3>
     		 <ul>
-    					<!-- <li><a href="http://localhost/wordpress/wp-admin/post-new.php" class="welcome-icon welcome-write-blog">Schreib deinen ersten Beitrag</a></li> -->
-    			<!-- <li><a href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page" class="welcome-icon welcome-add-page">Erstelle eine "Über mich"-Seite</a></li> -->
+                 <li><code>[shortcode attribute="value"]text[/shortcode]</code></li>
+                 <li>Use source code view to get class names for <a href="http://ianlunn.github.io/Hover/" target="_blank">Hover.CSS </a> Use source code view to get class names.</li>
+				<li>gültige Farbwerte <a href="http://www.w3schools.com/colors/colors_hex.asp" target="_blank">http://www.w3schools.com/</a></li>
     		</ul>
     	</div>
     	<div class="welcome-panel-column welcome-panel-last">
     		<h3>Links</h3>
     		<ul>
                 <li><a href="http://localhost/wordpress/" class="welcome-icon welcome-view-site">Sieh dir deine Website an</a></li>
-				<li><a href="http://ianlunn.github.io/Hover/" target="_blank" class="welcome-icon welcome-learn-more">Erfahre mehr über Hover.CSS </a></li>
+                <li><a class="button button-primary button-hero load-customize hide-if-no-customize" href="/wp-admin/edit.php">Beiträge bearbeiten</a></li>
     		</ul>
     	</div>
     	</div>
@@ -135,13 +114,14 @@ function isshort_adminpage() {
                     <input type="hidden" name="<?php echo $shortcode."_hidden" ?>" value="<?php echo $shortcode; ?>">
 
                     <th>
-                        <label for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label>
-                    <th>
+                        <label for="<?php echo $key; ?>"><?php echo $value['title']; ?>:</label><br />
+                        <code>[<?php echo $shortcode;?> <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/<?php echo $shortcode;?>]</code>
+                    </th>
                     <td>
                             <input class="form-control" type="text"  name="<?php echo $key; ?>" value="<?php echo $value['value']; ?>" >
                     <td>
+                        <label><?php echo $value['desc']; ?></label>
                     <td>
-                    <code>[<?php echo $shortcode;?> <?php echo $value['shortcode']; ?>="<?php echo $value['value']; ?>"]S.K.[/<?php echo $shortcode;?>]</code>
                     </td><!--form-group-->
                 </tr>
             <?php endforeach; //end of shortcode setting?>
@@ -181,31 +161,37 @@ $isshort_options  = array(
                 'shortcode' => 'color',
                 'title' => 'Background-color',
                 'value' => 'grey',
+                'desc'=> 'Sets the Background color of the Caption - accepts CSS values',
             ),
             'style' => array(
                 'shortcode' => 'style',
                 'title' => 'Style',
                 'value' => 'square',
+                'desc'=> 'Choose <code>circle</code> or <code>square</code>',
             ),
             'text-color'=> array(
                 'shortcode' => 'text-color',
                 'title' => 'Font-color',
                 'value' => 'white',
+                'desc'=> 'Color of the Font - accepts CSS values',
             ),
 		    'size' => array(
                 'shortcode' => 'size',
                 'title' => 'Width and Height',
                 'value' => '4em',
+                'desc'=> 'Size of the Caption (default = 4em) - accepts CSS values',
             ),
             'font-family' => array(
                 'shortcode' => 'font-family',
                 'title' => 'Font-Family',
                 'value' => 'Georgia',
+                'desc'=> 'simple font family CSS values (default = Georgia)',
             ),
             'hover' => array(
                 'shortcode' => 'hover',
                 'title' => 'Hover style',
                 'value' => 'hvr-buzz-out',
+                'desc'=> 'Hover.css classes (example: "hvr-buzz-out")',
             ),
         ),
     ),
@@ -217,26 +203,31 @@ $isshort_options  = array(
                 'shortcode' => 'color',
                 'title' => 'Background-color',
                 'value' => '#eee',
+                'desc'=> '',
             ),
             'corner' => array(
                 'shortcode' => 'corner',
                 'title' => 'Corner of Tip',
                 'value' => 'top-left',
+                'desc'=> '',
             ),
             'radius'  => array(
                 'shortcode' => 'radius',
                 'title' => 'Corner-radius',
                 'value' => '5px',
+                'desc'=> '',
             ),
             'text-color'=> array(
                 'shortcode' => 'text-color',
                 'title' => 'Font Color',
                 'value' => 'grey',
+                'desc'=> '',
             ),
             'hover' =>  array(
                 'shortcode' => 'hover',
                 'title' => 'HVR Effect',
                 'value' => 'hvr-shrink',
+                'desc'=> '',
             ),
         ),
     ),
@@ -248,26 +239,31 @@ $isshort_options  = array(
                 'shortcode' => 'color',
                 'title' => 'Background-color',
                 'value' => '#DCF8C6',
+                'desc'=> '',
             ),
             'corner' => array(
                 'shortcode' => 'corner',
                 'title' => 'Corner of Tip',
                 'value' => 'bottom-right',
+                'desc'=> '',
             ),
             'radius'  => array(
                 'shortcode' => 'radius',
                 'title' => 'Corner-radius',
                 'value' => '5px',
+                'desc'=> '',
             ),
             'text-color' => array(
                 'shortcode' => 'text-color',
                 'title' => 'Font Color',
                 'value' => 'grey',
+                'desc'=> '',
             ),
             'hover' =>  array(
                 'shortcode' => 'hover',
                 'title' => 'HVR Effect',
                 'value' => 'hvr-shrink',
+                'desc'=> '',
             ),
         ),
     ),
@@ -305,30 +301,26 @@ function updateShortcodeOption () {
     // get arguments to update
     $args = func_num_args();
     $arrArgs = func_get_args();
-    // print_r($arrArgs);
-    //update value
-    $newVal=array_shift($arrArgs);
-    // print_r($newVal);
-    // print_r($arrArgs);
-    // echo "<br/>";
-    // get old array from DB
-    $db_option = "isshort_options";
-    // print_r($shortcode_option_array = get_option(  $db_option  ));
-    $shortcode_option_array = get_option(  $db_option  );
 
+    //cut off te new value
+    $newVal=array_shift($arrArgs);
+
+    //cut off the shortcode
     $shortcode=array_shift($arrArgs);
 
-    // put new value into options-array
-    // $newVal_dest = '';
+    // get old array from DB
+    $shortcode_option_array = get_option(  'isshort_options'  );
+
+    // adress the right shortcode branch of the options-array
     $newVal_dest = '$shortcode_option_array';
     $newVal_dest=$newVal_dest."['".$shortcode."']";
 
+    //go deeper into the branches
     foreach ($arrArgs as $key => $value) {
         $newVal_dest = $newVal_dest."['".$value."']";
     }
-    // print_r($newVal_dest . $newVal );
+    //$newVal_dest stores the branch name.
     eval("$newVal_dest='$newVal';");
-    // print_r($shortcode_option_array);
 
     update_option( $db_option , $shortcode_option_array);
 }
