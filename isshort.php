@@ -169,5 +169,8 @@ function isshort_defaults(){
 	add_plugins_page( 'interviewstyles', 'Interview Styles', 'manage_options', 'isshort-options', 'isshort_adminpage');
 }
 
-// settings form markup
+// settings form
 include( plugin_dir_path( __FILE__ ) . '/admin/admin.php');
+
+//backend mce shortcode button
+include(plugin_dir_path( __FILE__ ) . '/admin/mce-button.php');
