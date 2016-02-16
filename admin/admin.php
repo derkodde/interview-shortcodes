@@ -46,7 +46,8 @@ function isshort_adminpage() {
                 updateShortcodeOption ($value , $currShortcode,'attr', $key ,'value' );
             }
 
-            ?>  <div class="updated"><p><strong><?php echo $currShortcodeTitle; ?> Shortcode gespeichert</strong></p></div> <?php
+            ?>
+            <div id="message" class="updated notice is-dismissible"><?php echo $currShortcodeTitle; ?> Shortcode gespeichert</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Diese Meldung verwerfen.</span></button></div><?php
         }
     }
 
@@ -64,19 +65,19 @@ function isshort_adminpage() {
     	<div class="welcome-panel-column">
     					<h3>Wie funktionieren shortcodes?</h3>
                     <p>zum Beispiel: <code>[cap]T[/cap]est</code></p>
-        			<p>Nutze die macht der MCE Buttons!</p>
+        			<p>Nutze die Macht der MCE Buttons!</p>
                     <img src="">
     			</div>
     	<div class="welcome-panel-column">
     		<h3>Attribute verwenden</h3>
     		 <ul>
                  <li><code>[shortcode attribute="value"]text[/shortcode]</code></li>
-                 <li>Use source code view to get class names for <a href="http://ianlunn.github.io/Hover/" target="_blank">Hover.CSS </a> Use source code view to get class names.</li>
+                 <li>Use source code view to get class names for <a href="http://ianlunn.github.io/Hover/" target="_blank">Hover.CSS </a></li>
 				<li>gültige Farbwerte <a href="http://www.w3schools.com/colors/colors_hex.asp" target="_blank">http://www.w3schools.com/</a></li>
     		</ul>
     	</div>
     	<div class="welcome-panel-column welcome-panel-last">
-    		<h3>Links</h3>
+    		<!-- <h3>Links</h3> -->
     		<ul>
                 <li><a href="http://localhost/wordpress/" class="welcome-icon welcome-view-site">Sieh dir deine Website an</a></li>
                 <li><a class="button button-primary button-hero load-customize hide-if-no-customize" href="/wp-admin/edit.php">Beiträge bearbeiten</a></li>
@@ -203,31 +204,31 @@ $isshort_options  = array(
                 'shortcode' => 'color',
                 'title' => 'Background-color',
                 'value' => '#eee',
-                'desc'=> '',
+                'desc'=> 'Sets the Background color of the Question (default is <code>#eee</code>) - accepts CSS values',
             ),
             'corner' => array(
                 'shortcode' => 'corner',
                 'title' => 'Corner of Tip',
                 'value' => 'top-left',
-                'desc'=> '',
+                'desc'=> 'Sets the corner of the tip (default is <code>top-left</code> - accepts <code>top-left, top-right, bottom-left, bottom-right)',
             ),
             'radius'  => array(
                 'shortcode' => 'radius',
                 'title' => 'Corner-radius',
                 'value' => '5px',
-                'desc'=> '',
+                'desc'=> 'Sets the radius of the edges - accepts CSS values for border-radius (default: <code>5px</code>) ',
             ),
             'text-color'=> array(
                 'shortcode' => 'text-color',
                 'title' => 'Font Color',
                 'value' => 'grey',
-                'desc'=> '',
+                'desc'=> 'Color of the Font - accepts CSS values',
             ),
             'hover' =>  array(
                 'shortcode' => 'hover',
                 'title' => 'HVR Effect',
                 'value' => 'hvr-shrink',
-                'desc'=> '',
+                'desc'=> 'Hover.css classes (example: <code>hvr-buzz-out</code>)',
             ),
         ),
     ),
@@ -239,31 +240,31 @@ $isshort_options  = array(
                 'shortcode' => 'color',
                 'title' => 'Background-color',
                 'value' => '#DCF8C6',
-                'desc'=> '',
+                'desc'=> 'Sets the Background color of the Answer (default is <code>#DCF8C6</code>) - accepts CSS values',
             ),
             'corner' => array(
                 'shortcode' => 'corner',
                 'title' => 'Corner of Tip',
                 'value' => 'bottom-right',
-                'desc'=> '',
+                'desc'=> 'Sets the corner of the tip (default is <code>bottom-right</code> for questions) - accepts <code>top-left, top-right, bottom-left, bottom-right)',
             ),
             'radius'  => array(
                 'shortcode' => 'radius',
                 'title' => 'Corner-radius',
                 'value' => '5px',
-                'desc'=> '',
+                'desc'=> 'Sets the radius of the edges - accepts CSS values for border-radius (default: <code>5px</code>) ',
             ),
             'text-color' => array(
                 'shortcode' => 'text-color',
                 'title' => 'Font Color',
                 'value' => 'grey',
-                'desc'=> '',
+                'desc'=>  'Color of the Font - accepts CSS values',
             ),
             'hover' =>  array(
                 'shortcode' => 'hover',
                 'title' => 'HVR Effect',
                 'value' => 'hvr-shrink',
-                'desc'=> '',
+                'desc'=>  'Hover.css classes (example: <code>hvr-buzz-out</code>)',
             ),
         ),
     ),
@@ -310,7 +311,7 @@ function updateShortcodeOption () {
 
     // get old array from DB
     $shortcode_option_array = get_option(  'isshort_options'  );
-
+    $db_option= 'isshort_options';
     // adress the right shortcode branch of the options-array
     $newVal_dest = '$shortcode_option_array';
     $newVal_dest=$newVal_dest."['".$shortcode."']";

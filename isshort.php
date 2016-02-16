@@ -29,7 +29,13 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+//default styles to
+function isshort_install() {
 
+    setOptionDefaults();
+
+}
+register_activation_hook( __FILE__, 'isshort_install' );
 /*
 *================================
 * Frontend
